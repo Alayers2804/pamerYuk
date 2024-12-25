@@ -26,9 +26,9 @@ namespace projectUAS
             organisasi = new Organisasi();
             kota = new Kota();
 
-            LoadCities(); // Load cities first
-            cbxKota.SelectedIndexChanged += cbxKota_SelectedIndexChanged; // Subscribe to event
-            cbxTingkat.SelectedIndexChanged += cbxTingkat_SelectedIndexChanged; // Subscribe to event
+            LoadCities();
+            cbxKota.SelectedIndexChanged += cbxKota_SelectedIndexChanged; 
+            cbxTingkat.SelectedIndexChanged += cbxTingkat_SelectedIndexChanged; 
         }
 
         private void btn_Tutup(object sender, EventArgs e)
@@ -78,8 +78,7 @@ namespace projectUAS
                 organizations.Add("Add New Organization");
                 cbxTingkat.DataSource = organizations;
 
-                // Enable the combo box if there are organizations available
-                cbxTingkat.Enabled = organizations.Count > 0; // At least one organization + the "Add New Organization" option
+                cbxTingkat.Enabled = organizations.Count > 0;
             }
             catch (Exception ex)
             {
@@ -119,7 +118,7 @@ namespace projectUAS
                 Password = txtPassword.Text,
                 TglLahir = dtpbirthDate.Value,
                 NoKTP = txtKTP.Text,
-                Foto = fotoBase64, // Store the base64 string of the photo
+                Foto = "test", 
                 IdKota = new Kota(GetSelectedCityId(), cbxKota.SelectedItem.ToString())
             };
 

@@ -23,13 +23,15 @@ namespace projectUAS
 
         private void btnTutup_Click(object sender, EventArgs e)
         {
-            this.Close();
+            
+            while (FormManager.Pop() != null) { }
 
-            Form previousForm = FormManager.Pop();
-            if (previousForm != null)
-            {
-                previousForm.Show();
-            }
+            
+            FormUtama mainForm = new FormUtama();
+            mainForm.Show();
+
+            
+            this.Close();
         }
 
         private void btnTambah_Click(object sender, EventArgs e)
@@ -59,7 +61,7 @@ namespace projectUAS
                 Foto = foto,
                 Video = video,
                 TglUpload = DateTime.Now,
-                Username = new User { Username = username }
+                User = new User { Username = username }
             };
 
             try

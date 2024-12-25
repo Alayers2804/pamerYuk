@@ -51,6 +51,7 @@ namespace projectUAS
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(272, 34);
             this.txtPassword.TabIndex = 11;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // lblPassword
             // 

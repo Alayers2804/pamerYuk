@@ -29,13 +29,15 @@ namespace projectUAS
 
         private void btnTutup_Click(object sender, EventArgs e)
         {
-            this.Close();
 
-            Form previousForm = FormManager.Pop();
-            if (previousForm != null)
-            {
-                previousForm.Show();
-            }
+            while (FormManager.Pop() != null) { }
+
+
+            FormUtama mainForm = new FormUtama();
+            mainForm.Show();
+
+
+            this.Close();
         }
     }
 }

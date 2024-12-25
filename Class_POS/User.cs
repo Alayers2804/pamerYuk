@@ -116,5 +116,34 @@ namespace Class_POS
                 return result != null ? Convert.ToInt32(result) : 0;
             }
         }
+
+        public List<string> GetFriendsByCityAndOrganization(int kotaId, int organisasiId, Koneksi koneksi)
+        {
+            List<string> friends = new List<string>();
+            string query = @"
+        SELECT u.username 
+        FROM user u
+        JOIN kisahhidup k ON u.username = k.username 
+        WHERE u.Kota_id = @kotaId AND k.Organisasi_id = @organisasiId 
+        AND u.username <> @currentUsername";
+
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@kotaId", kotaId);
+                cmd.Parameters.AddWithValue("@organisasiId", organisasiId);
+                cmd.Parameters.AddWithValue("@currentUsername", Session.Username); // Pass the current username
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        friends.Add(reader.GetString("username"));
+                    }
+                }
+            }
+            return friends;
+        }
+
+
+
     }
 }

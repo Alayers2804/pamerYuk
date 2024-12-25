@@ -23,7 +23,7 @@ namespace Class_POS
             Foto = "";
             Video = "";
             TglUpload = DateTime.Now;
-            Username = new User();
+            User = new User();
         }
 
         public int Id { get => id; set => id = value; }
@@ -31,7 +31,7 @@ namespace Class_POS
         public string Foto { get => foto; set => foto = value; }
         public string Video { get => video; set => video = value; }
         public DateTime TglUpload { get => tglUpload; set => tglUpload = value; }
-        public User Username { get => username; set => username = value; }
+        public User User { get => username; set => username = value; }
 
         public int GetLastInsertedId(Koneksi koneksi)
         {
@@ -61,7 +61,7 @@ namespace Class_POS
                 cmd.Parameters.AddWithValue("@foto", this.Foto);
                 cmd.Parameters.AddWithValue("@video", this.Video);
                 cmd.Parameters.AddWithValue("@tglUpload", this.TglUpload);
-                cmd.Parameters.AddWithValue("@username", this.Username.Username);
+                cmd.Parameters.AddWithValue("@username", User.Username);
 
                 // Execute the insert command
                 cmd.ExecuteNonQuery();
@@ -69,6 +69,34 @@ namespace Class_POS
 
             return newId; // Return the new ID
         }
+
+        public List<Konten> GetAllKonten(Koneksi koneksi)
+        {
+            List<Konten> kontenList = new List<Konten>();
+            string query = "SELECT * FROM konten"; // Adjust the query as needed
+
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Konten konten = new Konten
+                        {
+                            Id = reader.GetInt32("id"),
+                            Caption = reader.GetString("caption"),
+                            Foto = reader.GetString("foto"),
+                            Video = reader.GetString("video"),
+                            TglUpload = reader.GetDateTime("tglUpload"),
+                            User = new User { Username = reader.GetString("username") } // Assuming username is a string
+                        };
+                        kontenList.Add(konten);
+                    }
+                }
+            }
+            return kontenList;
+        }
+
     }
 
 }

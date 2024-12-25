@@ -32,6 +32,8 @@ namespace projectUAS
                 Session.KotaId = user.GetKotaId(username, koneksi);
                 Session.OrganisasiId = user.GetOrganisasiId(username, koneksi);
 
+                FormUtama formUtama = new FormUtama();
+                FormManager.ClearAndShow(formUtama);
                 this.Hide();
             }
             else

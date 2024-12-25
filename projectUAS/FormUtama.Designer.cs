@@ -42,6 +42,7 @@ namespace projectUAS
             this.organizationForm = new System.Windows.Forms.ToolStripMenuItem();
             this.KotaForm = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +56,7 @@ namespace projectUAS
             this.tmsCheck});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1117, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1180, 31);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -94,20 +95,20 @@ namespace projectUAS
             this.tmsFriend.Image = ((System.Drawing.Image)(resources.GetObject("tmsFriend.Image")));
             this.tmsFriend.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tmsFriend.Name = "tmsFriend";
-            this.tmsFriend.Size = new System.Drawing.Size(64, 24);
+            this.tmsFriend.Size = new System.Drawing.Size(64, 28);
             this.tmsFriend.Text = "Friend";
             // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.searchToolStripMenuItem.Text = "Search";
             this.searchToolStripMenuItem.Click += new System.EventHandler(this.Search_click);
             // 
             // chatToolStripMenuItem
             // 
             this.chatToolStripMenuItem.Name = "chatToolStripMenuItem";
-            this.chatToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
+            this.chatToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.chatToolStripMenuItem.Text = "Chat";
             this.chatToolStripMenuItem.Click += new System.EventHandler(this.Chat_click);
             // 
@@ -154,12 +155,23 @@ namespace projectUAS
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 31);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1180, 658);
+            this.flowLayoutPanel1.TabIndex = 2;
+            // 
             // FormUtama
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Orange;
-            this.ClientSize = new System.Drawing.Size(1117, 735);
+            this.ClientSize = new System.Drawing.Size(1180, 689);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.toolStrip1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormUtama";
@@ -186,6 +198,7 @@ namespace projectUAS
         private System.Windows.Forms.ToolStripMenuItem organizationForm;
         private System.Windows.Forms.ToolStripMenuItem KotaForm;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
 
