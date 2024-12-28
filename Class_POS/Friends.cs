@@ -74,15 +74,30 @@ namespace Class_POS
 
         public void AcceptFriendRequest(string requester, string requestee)
         {
-            string query = "UPDATE teman SET status = 'accepted', tglBerteman = NOW() WHERE username1 = @requester AND username2 = @requestee";
-
-            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            // Check if the friend request exists
+            string checkQuery = "SELECT COUNT(*) FROM teman WHERE username1 = @requester AND username2 = @requestee AND status = 'pending'";
+            using (MySqlCommand checkCmd = new MySqlCommand(checkQuery, koneksi.KoneksiDB))
             {
-                cmd.Parameters.AddWithValue("@requester", requester);
-                cmd.Parameters.AddWithValue("@requestee", requestee);
-                cmd.ExecuteNonQuery();
+                checkCmd.Parameters.AddWithValue("@requester", requester);
+                checkCmd.Parameters.AddWithValue("@requestee", requestee);
+
+                int count = Convert.ToInt32(checkCmd.ExecuteScalar());
+                if (count == 0)
+                {
+                    throw new InvalidOperationException("No pending friend request found between the users.");
+                }
+            }
+
+            // Update the status of the friend request to 'accepted'
+            string updateQuery = "UPDATE teman SET status = 'accepted', tglBerteman = NOW() WHERE username1 = @requester AND username2 = @requestee";
+            using (MySqlCommand updateCmd = new MySqlCommand(updateQuery, koneksi.KoneksiDB))
+            {
+                updateCmd.Parameters.AddWithValue("@requester", requester);
+                updateCmd.Parameters.AddWithValue("@requestee", requestee);
+                updateCmd.ExecuteNonQuery();
             }
         }
+
 
         public void RejectFriendRequest(string requester, string requestee)
         {
@@ -117,10 +132,10 @@ namespace Class_POS
             return friends;
         }
 
-        public List<string> GetPendingRequests(string username)
+        public List<(string requester, string status)> GetPendingRequests(string username)
         {
-            List<string> pendingRequests = new List<string>();
-            string query = "SELECT username1 FROM teman WHERE username2 = @username AND status = 'pending'";
+            List<(string requester, string status)> pendingRequests = new List<(string, string)>();
+            string query = "SELECT username1, status FROM teman WHERE username2 = @username AND status = 'pending'";
 
             using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
             {
@@ -129,11 +144,87 @@ namespace Class_POS
                 {
                     while (reader.Read())
                     {
-                        pendingRequests.Add(reader.GetString("username1"));
+                        pendingRequests.Add((reader.GetString("username1"), reader.GetString("status")));
                     }
                 }
             }
             return pendingRequests;
         }
+
+        public void AddToFavorites(string friendUsername, string currentUsername)
+        {
+            // Check if the friend is already in favorites
+            if (IsFavorited(friendUsername, currentUsername))
+            {
+                throw new InvalidOperationException("This user is already in your favorites.");
+            }
+
+            string query = "INSERT INTO favorite_friends (username, favorite_username) VALUES (@username, @favorite_username)";
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@username", currentUsername);
+                cmd.Parameters.AddWithValue("@favorite_username", friendUsername);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void RemoveFromFavorites(string friendUsername, string currentUsername)
+        {
+            string query = "DELETE FROM favorite_friends WHERE username = @username AND favorite_username = @favorite_username";
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@username", currentUsername);
+                cmd.Parameters.AddWithValue("@favorite_username", friendUsername);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public List<string> GetFavoriteFriends(string username)
+        {
+            List<string> favoriteFriends = new List<string>();
+            string query = "SELECT favorite_username FROM favorite_friends WHERE username = @username";
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@username", username);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        favoriteFriends.Add(reader.GetString("favorite_username"));
+                    }
+                }
+            }
+            return favoriteFriends;
+        }
+
+        public bool IsAlreadyFriends(string friendUsername, string currentUsername)
+        {
+            // Update the query to check only for accepted friendships
+            string query = "SELECT COUNT(*) FROM teman WHERE ((username1 = @username AND username2 = @friendUsername) OR (username1 = @friendUsername AND username2 = @username)) AND status = 'accepted'";
+
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@username", currentUsername);
+                cmd.Parameters.AddWithValue("@friendUsername", friendUsername);
+
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 0; // Return true if already friends (accepted)
+            }
+        }
+
+
+        public bool IsFavorited(string friendUsername, string currentUsername)
+        {
+            string query = "SELECT COUNT(*) FROM favorite_friends WHERE username = @username AND favorite_username = @friendUsername";
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@username", currentUsername);
+                cmd.Parameters.AddWithValue("@friendUsername", friendUsername);
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                return count > 0; // Return true if the friend is already favorited
+            }
+        }
+
+
     }
 }

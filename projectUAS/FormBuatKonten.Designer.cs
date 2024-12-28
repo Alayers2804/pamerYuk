@@ -30,27 +30,34 @@ namespace projectUAS
         private void InitializeComponent()
         {
             this.pnlPost = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.radioVideo = new System.Windows.Forms.RadioButton();
+            this.radioPhoto = new System.Windows.Forms.RadioButton();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtCaption = new System.Windows.Forms.TextBox();
-            this.txtMedia = new System.Windows.Forms.TextBox();
             this.lblCaption = new System.Windows.Forms.Label();
             this.btnTutup = new System.Windows.Forms.Button();
             this.btnTambah = new System.Windows.Forms.Button();
             this.lblMedia = new System.Windows.Forms.Label();
             this.lblHeader = new System.Windows.Forms.Label();
-            this.txtTag1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtTag2 = new System.Windows.Forms.TextBox();
+            this.btnSelectFile = new System.Windows.Forms.Button();
             this.pnlPost.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlPost
             // 
             this.pnlPost.BackColor = System.Drawing.Color.LightGray;
-            this.pnlPost.Controls.Add(this.txtTag2);
-            this.pnlPost.Controls.Add(this.txtTag1);
+            this.pnlPost.Controls.Add(this.btnSelectFile);
+            this.pnlPost.Controls.Add(this.panel1);
+            this.pnlPost.Controls.Add(this.pictureBox1);
+            this.pnlPost.Controls.Add(this.radioVideo);
+            this.pnlPost.Controls.Add(this.radioPhoto);
+            this.pnlPost.Controls.Add(this.checkedListBox1);
             this.pnlPost.Controls.Add(this.label1);
             this.pnlPost.Controls.Add(this.txtCaption);
-            this.pnlPost.Controls.Add(this.txtMedia);
             this.pnlPost.Controls.Add(this.lblCaption);
             this.pnlPost.Controls.Add(this.btnTutup);
             this.pnlPost.Controls.Add(this.btnTambah);
@@ -61,31 +68,77 @@ namespace projectUAS
             this.pnlPost.Size = new System.Drawing.Size(504, 673);
             this.pnlPost.TabIndex = 13;
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(116, 16);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(347, 128);
+            this.panel1.TabIndex = 26;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(116, 16);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(347, 128);
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
+            // 
+            // radioVideo
+            // 
+            this.radioVideo.AutoSize = true;
+            this.radioVideo.Location = new System.Drawing.Point(185, 160);
+            this.radioVideo.Name = "radioVideo";
+            this.radioVideo.Size = new System.Drawing.Size(64, 20);
+            this.radioVideo.TabIndex = 24;
+            this.radioVideo.TabStop = true;
+            this.radioVideo.Text = "Video";
+            this.radioVideo.UseVisualStyleBackColor = true;
+            // 
+            // radioPhoto
+            // 
+            this.radioPhoto.AutoSize = true;
+            this.radioPhoto.Location = new System.Drawing.Point(116, 160);
+            this.radioPhoto.Name = "radioPhoto";
+            this.radioPhoto.Size = new System.Drawing.Size(63, 20);
+            this.radioPhoto.TabIndex = 23;
+            this.radioPhoto.TabStop = true;
+            this.radioPhoto.Text = "Photo";
+            this.radioPhoto.UseVisualStyleBackColor = true;
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(116, 451);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(347, 89);
+            this.checkedListBox1.TabIndex = 22;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(24, 451);
+            this.label1.Margin = new System.Windows.Forms.Padding(10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 24);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Tag:";
+            // 
             // txtCaption
             // 
             this.txtCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCaption.Location = new System.Drawing.Point(116, 113);
+            this.txtCaption.Location = new System.Drawing.Point(116, 287);
             this.txtCaption.Margin = new System.Windows.Forms.Padding(10);
             this.txtCaption.Multiline = true;
             this.txtCaption.Name = "txtCaption";
-            this.txtCaption.Size = new System.Drawing.Size(347, 259);
+            this.txtCaption.Size = new System.Drawing.Size(347, 124);
             this.txtCaption.TabIndex = 20;
-            // 
-            // txtMedia
-            // 
-            this.txtMedia.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMedia.Location = new System.Drawing.Point(116, 10);
-            this.txtMedia.Margin = new System.Windows.Forms.Padding(10);
-            this.txtMedia.Multiline = true;
-            this.txtMedia.Name = "txtMedia";
-            this.txtMedia.Size = new System.Drawing.Size(347, 83);
-            this.txtMedia.TabIndex = 19;
             // 
             // lblCaption
             // 
             this.lblCaption.AutoSize = true;
             this.lblCaption.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCaption.Location = new System.Drawing.Point(10, 119);
+            this.lblCaption.Location = new System.Drawing.Point(24, 287);
             this.lblCaption.Margin = new System.Windows.Forms.Padding(10);
             this.lblCaption.Name = "lblCaption";
             this.lblCaption.Size = new System.Drawing.Size(90, 24);
@@ -137,36 +190,17 @@ namespace projectUAS
             this.lblHeader.TabIndex = 12;
             this.lblHeader.Text = "Post";
             // 
-            // txtTag1
+            // btnSelectFile
             // 
-            this.txtTag1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTag1.Location = new System.Drawing.Point(116, 392);
-            this.txtTag1.Margin = new System.Windows.Forms.Padding(10);
-            this.txtTag1.Multiline = true;
-            this.txtTag1.Name = "txtTag1";
-            this.txtTag1.Size = new System.Drawing.Size(347, 30);
-            this.txtTag1.TabIndex = 22;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 398);
-            this.label1.Margin = new System.Windows.Forms.Padding(10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 24);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Tag:";
-            // 
-            // txtTag2
-            // 
-            this.txtTag2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTag2.Location = new System.Drawing.Point(116, 442);
-            this.txtTag2.Margin = new System.Windows.Forms.Padding(10);
-            this.txtTag2.Multiline = true;
-            this.txtTag2.Name = "txtTag2";
-            this.txtTag2.Size = new System.Drawing.Size(347, 30);
-            this.txtTag2.TabIndex = 23;
+            this.btnSelectFile.Font = new System.Drawing.Font("Arial Black", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSelectFile.Location = new System.Drawing.Point(116, 198);
+            this.btnSelectFile.Margin = new System.Windows.Forms.Padding(15);
+            this.btnSelectFile.Name = "btnSelectFile";
+            this.btnSelectFile.Size = new System.Drawing.Size(133, 44);
+            this.btnSelectFile.TabIndex = 27;
+            this.btnSelectFile.Text = "Pilih File";
+            this.btnSelectFile.UseVisualStyleBackColor = true;
+            this.btnSelectFile.Click += new System.EventHandler(this.btnSelectFile_Click);
             // 
             // FormBuatKonten
             // 
@@ -180,6 +214,7 @@ namespace projectUAS
             this.Text = "FormBuatKonten";
             this.pnlPost.ResumeLayout(false);
             this.pnlPost.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,9 +229,12 @@ namespace projectUAS
         private System.Windows.Forms.Label lblMedia;
         private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.TextBox txtCaption;
-        private System.Windows.Forms.TextBox txtMedia;
-        private System.Windows.Forms.TextBox txtTag1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtTag2;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.RadioButton radioVideo;
+        private System.Windows.Forms.RadioButton radioPhoto;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnSelectFile;
     }
 }

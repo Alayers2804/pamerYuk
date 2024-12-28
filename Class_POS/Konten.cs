@@ -97,6 +97,38 @@ namespace Class_POS
             return kontenList;
         }
 
+        public void InsertTag(Koneksi koneksi, int id, string tagName)
+        {
+            string query = "INSERT INTO tag (konten_id, username) VALUES (@konten_id, @username)";
+
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@konten_id", id); // Use the ID of the newly created Konten
+                cmd.Parameters.AddWithValue("@username", tagName);
+                
+                cmd.ExecuteNonQuery(); // Execute the insert command
+            }
+        }
+
+        public List<string> GetTaggedUsers(Koneksi koneksi)
+        {
+            List<string> taggedUsers = new List<string>();
+            string query = "SELECT username FROM tag WHERE konten_id = @konten_id";
+
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@konten_id", this.Id);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        taggedUsers.Add(reader.GetString("username"));
+                    }
+                }
+            }
+            return taggedUsers;
+        }
+
     }
 
 }

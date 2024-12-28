@@ -31,6 +31,15 @@ namespace projectUAS
         {
             this.lblHeader = new System.Windows.Forms.Label();
             this.pnlPendaftaran = new System.Windows.Forms.Panel();
+            this.txtDeskripsi = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtThnAkr = new System.Windows.Forms.TextBox();
+            this.txtThnAwl = new System.Windows.Forms.TextBox();
+            this.lblOrg = new System.Windows.Forms.Label();
+            this.cbxTingkat = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnDaftar = new System.Windows.Forms.Button();
             this.dtpbirthDate = new System.Windows.Forms.DateTimePicker();
@@ -46,15 +55,6 @@ namespace projectUAS
             this.lblKTP = new System.Windows.Forms.Label();
             this.txtNama = new System.Windows.Forms.TextBox();
             this.lblNama = new System.Windows.Forms.Label();
-            this.lblOrg = new System.Windows.Forms.Label();
-            this.cbxTingkat = new System.Windows.Forms.ComboBox();
-            this.txtThnAwl = new System.Windows.Forms.TextBox();
-            this.txtThnAkr = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtDeskripsi = new System.Windows.Forms.TextBox();
             this.pnlPendaftaran.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -102,11 +102,103 @@ namespace projectUAS
             this.pnlPendaftaran.Size = new System.Drawing.Size(1245, 673);
             this.pnlPendaftaran.TabIndex = 2;
             // 
+            // txtDeskripsi
+            // 
+            this.txtDeskripsi.Location = new System.Drawing.Point(807, 133);
+            this.txtDeskripsi.Multiline = true;
+            this.txtDeskripsi.Name = "txtDeskripsi";
+            this.txtDeskripsi.Size = new System.Drawing.Size(384, 133);
+            this.txtDeskripsi.TabIndex = 30;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(682, 130);
+            this.label4.Margin = new System.Windows.Forms.Padding(10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(105, 24);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Deskripsi:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(189, 281);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(163, 181);
+            this.pictureBox1.TabIndex = 28;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(953, 290);
+            this.label3.Margin = new System.Windows.Forms.Padding(10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 24);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "Sampai :";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(726, 290);
+            this.label2.Margin = new System.Windows.Forms.Padding(10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(61, 24);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "Dari :";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtThnAkr
+            // 
+            this.txtThnAkr.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtThnAkr.Location = new System.Drawing.Point(1053, 286);
+            this.txtThnAkr.Margin = new System.Windows.Forms.Padding(10);
+            this.txtThnAkr.Name = "txtThnAkr";
+            this.txtThnAkr.Size = new System.Drawing.Size(138, 34);
+            this.txtThnAkr.TabIndex = 25;
+            // 
+            // txtThnAwl
+            // 
+            this.txtThnAwl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtThnAwl.Location = new System.Drawing.Point(807, 286);
+            this.txtThnAwl.Margin = new System.Windows.Forms.Padding(10);
+            this.txtThnAwl.Name = "txtThnAwl";
+            this.txtThnAwl.Size = new System.Drawing.Size(138, 34);
+            this.txtThnAwl.TabIndex = 24;
+            // 
+            // lblOrg
+            // 
+            this.lblOrg.AutoSize = true;
+            this.lblOrg.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrg.Location = new System.Drawing.Point(668, 76);
+            this.lblOrg.Margin = new System.Windows.Forms.Padding(10);
+            this.lblOrg.Name = "lblOrg";
+            this.lblOrg.Size = new System.Drawing.Size(119, 24);
+            this.lblOrg.TabIndex = 23;
+            this.lblOrg.Text = "Organisasi:";
+            // 
+            // cbxTingkat
+            // 
+            this.cbxTingkat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbxTingkat.FormattingEnabled = true;
+            this.cbxTingkat.Location = new System.Drawing.Point(807, 76);
+            this.cbxTingkat.Margin = new System.Windows.Forms.Padding(10);
+            this.cbxTingkat.Name = "cbxTingkat";
+            this.cbxTingkat.Size = new System.Drawing.Size(384, 33);
+            this.cbxTingkat.TabIndex = 22;
+            this.cbxTingkat.SelectedIndexChanged += new System.EventHandler(this.cbxTingkat_SelectedIndexChanged);
+            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.button1.Font = new System.Drawing.Font("Arial Black", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(188, 473);
+            this.button1.Location = new System.Drawing.Point(465, 510);
             this.button1.Margin = new System.Windows.Forms.Padding(15);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(126, 44);
@@ -119,7 +211,7 @@ namespace projectUAS
             // 
             this.btnDaftar.BackColor = System.Drawing.Color.CornflowerBlue;
             this.btnDaftar.Font = new System.Drawing.Font("Arial Black", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDaftar.Location = new System.Drawing.Point(464, 473);
+            this.btnDaftar.Location = new System.Drawing.Point(730, 510);
             this.btnDaftar.Margin = new System.Windows.Forms.Padding(15);
             this.btnDaftar.Name = "btnDaftar";
             this.btnDaftar.Size = new System.Drawing.Size(126, 44);
@@ -153,7 +245,7 @@ namespace projectUAS
             // 
             this.lblKota.AutoSize = true;
             this.lblKota.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKota.Location = new System.Drawing.Point(107, 345);
+            this.lblKota.Location = new System.Drawing.Point(726, 27);
             this.lblKota.Margin = new System.Windows.Forms.Padding(10);
             this.lblKota.Name = "lblKota";
             this.lblKota.Size = new System.Drawing.Size(61, 24);
@@ -164,10 +256,10 @@ namespace projectUAS
             // 
             this.cbxKota.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxKota.FormattingEnabled = true;
-            this.cbxKota.Location = new System.Drawing.Point(186, 342);
+            this.cbxKota.Location = new System.Drawing.Point(807, 23);
             this.cbxKota.Margin = new System.Windows.Forms.Padding(10);
             this.cbxKota.Name = "cbxKota";
-            this.cbxKota.Size = new System.Drawing.Size(402, 33);
+            this.cbxKota.Size = new System.Drawing.Size(384, 33);
             this.cbxKota.TabIndex = 12;
             this.cbxKota.SelectedIndexChanged += new System.EventHandler(this.cbxKota_SelectedIndexChanged);
             // 
@@ -261,98 +353,6 @@ namespace projectUAS
             this.lblNama.Size = new System.Drawing.Size(157, 24);
             this.lblNama.TabIndex = 0;
             this.lblNama.Text = "Nama Lengkap:";
-            // 
-            // lblOrg
-            // 
-            this.lblOrg.AutoSize = true;
-            this.lblOrg.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrg.Location = new System.Drawing.Point(667, 28);
-            this.lblOrg.Margin = new System.Windows.Forms.Padding(10);
-            this.lblOrg.Name = "lblOrg";
-            this.lblOrg.Size = new System.Drawing.Size(119, 24);
-            this.lblOrg.TabIndex = 23;
-            this.lblOrg.Text = "Organisasi:";
-            // 
-            // cbxTingkat
-            // 
-            this.cbxTingkat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxTingkat.FormattingEnabled = true;
-            this.cbxTingkat.Location = new System.Drawing.Point(806, 24);
-            this.cbxTingkat.Margin = new System.Windows.Forms.Padding(10);
-            this.cbxTingkat.Name = "cbxTingkat";
-            this.cbxTingkat.Size = new System.Drawing.Size(384, 33);
-            this.cbxTingkat.TabIndex = 22;
-            this.cbxTingkat.SelectedIndexChanged += new System.EventHandler(this.cbxTingkat_SelectedIndexChanged);
-            // 
-            // txtThnAwl
-            // 
-            this.txtThnAwl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtThnAwl.Location = new System.Drawing.Point(806, 234);
-            this.txtThnAwl.Margin = new System.Windows.Forms.Padding(10);
-            this.txtThnAwl.Name = "txtThnAwl";
-            this.txtThnAwl.Size = new System.Drawing.Size(138, 34);
-            this.txtThnAwl.TabIndex = 24;
-            // 
-            // txtThnAkr
-            // 
-            this.txtThnAkr.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtThnAkr.Location = new System.Drawing.Point(1052, 234);
-            this.txtThnAkr.Margin = new System.Windows.Forms.Padding(10);
-            this.txtThnAkr.Name = "txtThnAkr";
-            this.txtThnAkr.Size = new System.Drawing.Size(138, 34);
-            this.txtThnAkr.TabIndex = 25;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(725, 238);
-            this.label2.Margin = new System.Windows.Forms.Padding(10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 24);
-            this.label2.TabIndex = 26;
-            this.label2.Text = "Dari :";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(952, 238);
-            this.label3.Margin = new System.Windows.Forms.Padding(10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 24);
-            this.label3.TabIndex = 27;
-            this.label3.Text = "Sampai :";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(189, 281);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(399, 50);
-            this.pictureBox1.TabIndex = 28;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(681, 78);
-            this.label4.Margin = new System.Windows.Forms.Padding(10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(105, 24);
-            this.label4.TabIndex = 29;
-            this.label4.Text = "Deskripsi:";
-            // 
-            // txtDeskripsi
-            // 
-            this.txtDeskripsi.Location = new System.Drawing.Point(806, 81);
-            this.txtDeskripsi.Multiline = true;
-            this.txtDeskripsi.Name = "txtDeskripsi";
-            this.txtDeskripsi.Size = new System.Drawing.Size(384, 133);
-            this.txtDeskripsi.TabIndex = 30;
             // 
             // FormDaftar
             // 

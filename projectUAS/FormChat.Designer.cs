@@ -30,47 +30,34 @@ namespace projectUAS
         private void InitializeComponent()
         {
             this.pnlChat = new System.Windows.Forms.Panel();
-            this.dtgChat = new System.Windows.Forms.DataGridView();
             this.btnTutup = new System.Windows.Forms.Button();
-            this.cbxNamaOrg = new System.Windows.Forms.ComboBox();
-            this.lblOrg = new System.Windows.Forms.Label();
-            this.cbxTingkat = new System.Windows.Forms.ComboBox();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.listBoxFriends = new System.Windows.Forms.ListBox();
+            this.rtbChat = new System.Windows.Forms.RichTextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnSend = new System.Windows.Forms.Button();
             this.pnlChat.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgChat)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlChat
             // 
             this.pnlChat.BackColor = System.Drawing.Color.LightGray;
-            this.pnlChat.Controls.Add(this.dtgChat);
+            this.pnlChat.Controls.Add(this.btnSend);
+            this.pnlChat.Controls.Add(this.textBox1);
+            this.pnlChat.Controls.Add(this.rtbChat);
+            this.pnlChat.Controls.Add(this.listBoxFriends);
             this.pnlChat.Controls.Add(this.btnTutup);
-            this.pnlChat.Controls.Add(this.cbxNamaOrg);
-            this.pnlChat.Controls.Add(this.lblOrg);
-            this.pnlChat.Controls.Add(this.cbxTingkat);
             this.pnlChat.Location = new System.Drawing.Point(17, 48);
             this.pnlChat.Margin = new System.Windows.Forms.Padding(10);
             this.pnlChat.Name = "pnlChat";
             this.pnlChat.Size = new System.Drawing.Size(725, 673);
             this.pnlChat.TabIndex = 7;
             // 
-            // dtgChat
-            // 
-            this.dtgChat.BackgroundColor = System.Drawing.Color.White;
-            this.dtgChat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgChat.Location = new System.Drawing.Point(15, 63);
-            this.dtgChat.Margin = new System.Windows.Forms.Padding(10);
-            this.dtgChat.Name = "dtgChat";
-            this.dtgChat.RowHeadersWidth = 51;
-            this.dtgChat.RowTemplate.Height = 24;
-            this.dtgChat.Size = new System.Drawing.Size(691, 507);
-            this.dtgChat.TabIndex = 17;
-            // 
             // btnTutup
             // 
             this.btnTutup.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnTutup.Font = new System.Drawing.Font("Arial Black", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTutup.Location = new System.Drawing.Point(580, 607);
+            this.btnTutup.Location = new System.Drawing.Point(15, 607);
             this.btnTutup.Margin = new System.Windows.Forms.Padding(15);
             this.btnTutup.Name = "btnTutup";
             this.btnTutup.Size = new System.Drawing.Size(126, 51);
@@ -78,38 +65,6 @@ namespace projectUAS
             this.btnTutup.Text = "Tutup";
             this.btnTutup.UseVisualStyleBackColor = false;
             this.btnTutup.Click += new System.EventHandler(this.btnTutup_Click);
-            // 
-            // cbxNamaOrg
-            // 
-            this.cbxNamaOrg.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxNamaOrg.FormattingEnabled = true;
-            this.cbxNamaOrg.Location = new System.Drawing.Point(434, 10);
-            this.cbxNamaOrg.Margin = new System.Windows.Forms.Padding(10);
-            this.cbxNamaOrg.Name = "cbxNamaOrg";
-            this.cbxNamaOrg.Size = new System.Drawing.Size(272, 33);
-            this.cbxNamaOrg.TabIndex = 16;
-            // 
-            // lblOrg
-            // 
-            this.lblOrg.AutoSize = true;
-            this.lblOrg.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOrg.Location = new System.Drawing.Point(10, 13);
-            this.lblOrg.Margin = new System.Windows.Forms.Padding(10);
-            this.lblOrg.Name = "lblOrg";
-            this.lblOrg.Size = new System.Drawing.Size(119, 24);
-            this.lblOrg.TabIndex = 15;
-            this.lblOrg.Text = "Organisasi:";
-            // 
-            // cbxTingkat
-            // 
-            this.cbxTingkat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbxTingkat.FormattingEnabled = true;
-            this.cbxTingkat.Location = new System.Drawing.Point(142, 10);
-            this.cbxTingkat.Margin = new System.Windows.Forms.Padding(10);
-            this.cbxTingkat.Name = "cbxTingkat";
-            this.cbxTingkat.Size = new System.Drawing.Size(272, 33);
-            this.cbxTingkat.TabIndex = 13;
-            this.cbxTingkat.SelectedIndexChanged += new System.EventHandler(this.cbxTingkat_SelectedIndexChanged);
             // 
             // lblHeader
             // 
@@ -120,6 +75,46 @@ namespace projectUAS
             this.lblHeader.Size = new System.Drawing.Size(72, 32);
             this.lblHeader.TabIndex = 6;
             this.lblHeader.Text = "Chat";
+            // 
+            // listBoxFriends
+            // 
+            this.listBoxFriends.FormattingEnabled = true;
+            this.listBoxFriends.ItemHeight = 16;
+            this.listBoxFriends.Location = new System.Drawing.Point(3, 42);
+            this.listBoxFriends.Name = "listBoxFriends";
+            this.listBoxFriends.Size = new System.Drawing.Size(169, 436);
+            this.listBoxFriends.TabIndex = 4;
+            this.listBoxFriends.SelectedIndexChanged += new System.EventHandler(this.listBoxFriends_SelectedIndexChanged);
+            // 
+            // rtbChat
+            // 
+            this.rtbChat.Location = new System.Drawing.Point(175, 42);
+            this.rtbChat.Name = "rtbChat";
+            this.rtbChat.Size = new System.Drawing.Size(547, 436);
+            this.rtbChat.TabIndex = 5;
+            this.rtbChat.Text = "";
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Location = new System.Drawing.Point(175, 402);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(550, 76);
+            this.textBox1.TabIndex = 6;
+            // 
+            // btnSend
+            // 
+            this.btnSend.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnSend.Font = new System.Drawing.Font("Arial Black", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSend.Location = new System.Drawing.Point(175, 482);
+            this.btnSend.Margin = new System.Windows.Forms.Padding(15);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(126, 51);
+            this.btnSend.TabIndex = 7;
+            this.btnSend.Text = "Send";
+            this.btnSend.UseVisualStyleBackColor = false;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // FormChat
             // 
@@ -133,7 +128,6 @@ namespace projectUAS
             this.Text = "FormChat";
             this.pnlChat.ResumeLayout(false);
             this.pnlChat.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgChat)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,11 +136,11 @@ namespace projectUAS
         #endregion
 
         private System.Windows.Forms.Panel pnlChat;
-        private System.Windows.Forms.DataGridView dtgChat;
         private System.Windows.Forms.Button btnTutup;
-        private System.Windows.Forms.ComboBox cbxNamaOrg;
-        private System.Windows.Forms.Label lblOrg;
-        private System.Windows.Forms.ComboBox cbxTingkat;
         private System.Windows.Forms.Label lblHeader;
+        private System.Windows.Forms.ListBox listBoxFriends;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RichTextBox rtbChat;
+        private System.Windows.Forms.Button btnSend;
     }
 }

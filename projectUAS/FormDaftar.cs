@@ -18,6 +18,8 @@ namespace projectUAS
         private Organisasi organisasi;
         private Kota kota;
 
+        private string imagePath;
+
         public FormDaftar()
         {
             InitializeComponent();
@@ -26,6 +28,7 @@ namespace projectUAS
             organisasi = new Organisasi();
             kota = new Kota();
 
+            CreatePicturesDirectory();
             LoadCities();
             cbxKota.SelectedIndexChanged += cbxKota_SelectedIndexChanged; 
             cbxTingkat.SelectedIndexChanged += cbxTingkat_SelectedIndexChanged; 
@@ -109,8 +112,7 @@ namespace projectUAS
 
         private void btnDaftar_Click(object sender, EventArgs e)
         {
-            byte[] photoBytes = GetPhotoAsByteArray();
-            string fotoBase64 = ConvertImageToBase64String(photoBytes);
+           
 
             User newUser = new User
             {
@@ -118,7 +120,7 @@ namespace projectUAS
                 Password = txtPassword.Text,
                 TglLahir = dtpbirthDate.Value,
                 NoKTP = txtKTP.Text,
-                Foto = "test", 
+                Foto = imagePath,
                 IdKota = new Kota(GetSelectedCityId(), cbxKota.SelectedItem.ToString())
             };
 
@@ -141,19 +143,6 @@ namespace projectUAS
             }
         }
 
-        private byte[] GetPhotoAsByteArray()
-        {
-            if (pictureBox1.Image != null)
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    return ms.ToArray();
-                }
-            }
-            return null;
-        }
-
         private int GetSelectedCityId()
         {
             if (cbxKota.SelectedItem != null)
@@ -161,7 +150,7 @@ namespace projectUAS
                 string selectedCity = cbxKota.SelectedItem.ToString();
                 return kota.GetCityIdByName(selectedCity, koneksi);
             }
-            return 0; // Return 0 if no city is selected
+            return 0;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -171,10 +160,30 @@ namespace projectUAS
                 openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    pictureBox1.Image = new Bitmap(openFileDialog.FileName);
+                    string fileName = Path.GetFileName(openFileDialog.FileName);
+                    string picturesDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pictures");
+
+                    // Check if the pictures directory exists, if not, create it
+                    if (!Directory.Exists(picturesDirectory))
+                    {
+                        Directory.CreateDirectory(picturesDirectory);
+                    }
+
+                    string destinationPath = Path.Combine(picturesDirectory, fileName);
+
+                    // Copy the file to the destination path
+                    File.Copy(openFileDialog.FileName, destinationPath, true); // Overwrite if exists
+
+                    imagePath = destinationPath;
+
+                    // Load the image into the PictureBox
+                    pictureBox1.Image = new Bitmap(destinationPath);
+                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; // Set the SizeMode to Zoom
                 }
             }
         }
+
+
 
         private int GetSelectedOrganizationId()
         {
@@ -184,15 +193,6 @@ namespace projectUAS
                 return organisasi.GetOrganizationIdByName(selectedOrganization, koneksi);
             }
             return 0; // Return 0 if no organization is selected
-        }
-
-        private string ConvertImageToBase64String(byte[] imageBytes)
-        {
-            if (imageBytes == null || imageBytes.Length == 0)
-            {
-                return null; // Return null if there are no image bytes
-            }
-            return Convert.ToBase64String(imageBytes); // Convert byte array to Base64 string
         }
 
         private void cbxKota_SelectedIndexChanged(object sender, EventArgs e)
@@ -209,6 +209,15 @@ namespace projectUAS
                 {
                     LoadOrganizations(); // Load organizations based on the selected city
                 }
+            }
+        }
+
+        private void CreatePicturesDirectory()
+        {
+            string picturesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pictures");
+            if (!Directory.Exists(picturesPath))
+            {
+                Directory.CreateDirectory(picturesPath); // Create the directory if it doesn't exist
             }
         }
     }

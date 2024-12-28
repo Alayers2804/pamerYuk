@@ -34,6 +34,8 @@ namespace projectUAS
             this.tsmUser = new System.Windows.Forms.ToolStripDropDownButton();
             this.pendaftaranToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tmsFriend = new System.Windows.Forms.ToolStripDropDownButton();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +43,6 @@ namespace projectUAS
             this.tmsCheck = new System.Windows.Forms.ToolStripDropDownButton();
             this.organizationForm = new System.Windows.Forms.ToolStripMenuItem();
             this.KotaForm = new System.Windows.Forms.ToolStripMenuItem();
-            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +57,7 @@ namespace projectUAS
             this.tmsCheck});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1180, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(1180, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -66,7 +67,8 @@ namespace projectUAS
             this.tsmUser.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pendaftaranToolStripMenuItem,
             this.loginToolStripMenuItem,
-            this.logoutToolStripMenuItem});
+            this.logoutToolStripMenuItem,
+            this.profileToolStripMenuItem});
             this.tsmUser.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsmUser.Name = "tsmUser";
             this.tsmUser.Size = new System.Drawing.Size(52, 24);
@@ -86,6 +88,20 @@ namespace projectUAS
             this.loginToolStripMenuItem.Text = "Login";
             this.loginToolStripMenuItem.Click += new System.EventHandler(this.Login_click);
             // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.logoutToolStripMenuItem.Text = "Logout";
+            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
+            // 
+            // profileToolStripMenuItem
+            // 
+            this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
+            this.profileToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.profileToolStripMenuItem.Text = "Profile";
+            this.profileToolStripMenuItem.Click += new System.EventHandler(this.profileToolStripMenuItem_Click);
+            // 
             // tmsFriend
             // 
             this.tmsFriend.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -95,7 +111,7 @@ namespace projectUAS
             this.tmsFriend.Image = ((System.Drawing.Image)(resources.GetObject("tmsFriend.Image")));
             this.tmsFriend.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tmsFriend.Name = "tmsFriend";
-            this.tmsFriend.Size = new System.Drawing.Size(64, 28);
+            this.tmsFriend.Size = new System.Drawing.Size(64, 24);
             this.tmsFriend.Text = "Friend";
             // 
             // searchToolStripMenuItem
@@ -137,32 +153,25 @@ namespace projectUAS
             // organizationForm
             // 
             this.organizationForm.Name = "organizationForm";
-            this.organizationForm.Size = new System.Drawing.Size(224, 26);
+            this.organizationForm.Size = new System.Drawing.Size(161, 26);
             this.organizationForm.Text = "Organisasi";
             this.organizationForm.Click += new System.EventHandler(this.organizationForm_Click);
             // 
             // KotaForm
             // 
             this.KotaForm.Name = "KotaForm";
-            this.KotaForm.Size = new System.Drawing.Size(224, 26);
+            this.KotaForm.Size = new System.Drawing.Size(161, 26);
             this.KotaForm.Text = "Kota";
             this.KotaForm.Click += new System.EventHandler(this.KotaForm_Click);
-            // 
-            // logoutToolStripMenuItem
-            // 
-            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.logoutToolStripMenuItem.Text = "Logout";
-            this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 31);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 27);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1180, 658);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1180, 662);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // FormUtama
@@ -199,6 +208,7 @@ namespace projectUAS
         private System.Windows.Forms.ToolStripMenuItem KotaForm;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
     }
 }
 

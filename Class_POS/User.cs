@@ -143,6 +143,51 @@ namespace Class_POS
             return friends;
         }
 
+        public User GetUserProfile(string username, Koneksi koneksi)
+        {
+            string query = "SELECT username, noKTP, foto, Kota_id FROM user WHERE username = @username";
+            User user = null;
+
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@username", username);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        user = new User
+                        {
+                            Username = reader["username"].ToString(),
+                            NoKTP = reader["noKTP"].ToString(),
+                            Foto = reader["foto"].ToString(),
+                            IdKota = new Kota(Convert.ToInt32(reader["Kota_id"]), "") // Load city ID
+                        };
+                    }
+                }
+            }
+            return user;
+        }
+
+        public string GetUserDescription(string username, Koneksi koneksi)
+        {
+            string query = "SELECT Organisasi_id, deskripsi FROM kisahhidup WHERE username = @username";
+            string description = null;
+
+            using (MySqlCommand cmd = new MySqlCommand(query, koneksi.KoneksiDB))
+            {
+                cmd.Parameters.AddWithValue("@username", username);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        description = reader["deskripsi"].ToString();
+                        // Optionally, you can also return the organization ID if needed
+                    }
+                }
+            }
+            return description;
+        }
+
 
 
     }
