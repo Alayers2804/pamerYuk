@@ -11,7 +11,7 @@
  Target Server Version : 80040 (8.0.40)
  File Encoding         : 65001
 
- Date: 29/12/2024 00:52:53
+ Date: 29/12/2024 04:17:24
 */
 
 SET NAMES utf8mb4;
@@ -39,6 +39,27 @@ CREATE TABLE `chat`  (
 -- ----------------------------
 INSERT INTO `chat` VALUES (1, 'ferdinand', 'test', 'Ini testing', '2024-12-29 00:16:52');
 INSERT INTO `chat` VALUES (2, 'test', 'ferdinand', 'oh iya bang, oke', '2024-12-29 00:18:06');
+
+-- ----------------------------
+-- Table structure for favorite_friends
+-- ----------------------------
+DROP TABLE IF EXISTS `favorite_friends`;
+CREATE TABLE `favorite_friends`  (
+  `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `favorite_username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  PRIMARY KEY (`username`, `favorite_username`) USING BTREE,
+  INDEX `favorite_username`(`favorite_username` ASC) USING BTREE,
+  CONSTRAINT `favorite_friends_ibfk_1` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  CONSTRAINT `favorite_friends_ibfk_2` FOREIGN KEY (`favorite_username`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of favorite_friends
+-- ----------------------------
+INSERT INTO `favorite_friends` VALUES ('test', 'ferdinand');
+INSERT INTO `favorite_friends` VALUES ('ferdinand', 'test');
+INSERT INTO `favorite_friends` VALUES ('ferdinand', 'test2');
+INSERT INTO `favorite_friends` VALUES ('test', 'test2');
 
 -- ----------------------------
 -- Table structure for kisahhidup
@@ -113,6 +134,8 @@ INSERT INTO `konten` VALUES (2, 'aduh', 'testing', 'testing', '2024-12-24 12:08:
 INSERT INTO `konten` VALUES (3, 'main yuk', 'test lagi', 'test lagi', '2024-12-24 23:26:18', 'Ferdinand');
 INSERT INTO `konten` VALUES (4, 'Apateu', 'Testing', 'Testing', '2024-12-28 23:33:40', 'ferdinand');
 INSERT INTO `konten` VALUES (5, 'testing ', 'testing', 'testing', '2024-12-28 23:40:53', 'ferdinand');
+INSERT INTO `konten` VALUES (6, 'testing', 'konten\\.png', 'konten\\.png', '2024-12-29 02:44:28', 'test');
+INSERT INTO `konten` VALUES (7, 'testing', 'konten\\Form karyawan.png', 'none', '2024-12-29 02:47:09', 'test');
 
 -- ----------------------------
 -- Table structure for kota
@@ -172,6 +195,8 @@ CREATE TABLE `tag`  (
 -- Records of tag
 -- ----------------------------
 INSERT INTO `tag` VALUES (5, 'test');
+INSERT INTO `tag` VALUES (6, 'ferdinand');
+INSERT INTO `tag` VALUES (7, 'ferdinand');
 
 -- ----------------------------
 -- Table structure for teman
@@ -193,8 +218,8 @@ CREATE TABLE `teman`  (
 -- Records of teman
 -- ----------------------------
 INSERT INTO `teman` VALUES ('ferdinand', 'test', '2024-12-28', 'accepted');
-INSERT INTO `teman` VALUES ('test2', 'ferdinand', '2024-12-28', 'pending');
-INSERT INTO `teman` VALUES ('test2', 'test', '2024-12-28', 'pending');
+INSERT INTO `teman` VALUES ('test2', 'ferdinand', '2024-12-29', 'accepted');
+INSERT INTO `teman` VALUES ('test2', 'test', '2024-12-29', 'accepted');
 
 -- ----------------------------
 -- Table structure for user
