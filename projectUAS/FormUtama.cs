@@ -144,12 +144,7 @@ namespace projectUAS
 
         private void FormUtama_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Show a confirmation dialog before exiting
-            var result = MessageBox.Show("Are you sure you want to exit the application?", "Confirm Exit", MessageBoxButtons.YesNo);
-            if (result == DialogResult.No)
-            {
-                e.Cancel = true; // Cancel the closing event
-            }
+            Application.Exit();
         }
     }
 }

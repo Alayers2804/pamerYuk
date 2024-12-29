@@ -11,21 +11,28 @@ namespace projectUAS
     {
         private Koneksi koneksi;
         private string storageDirectory;
-        private string photoPath; // Variable to store the photo path
-        private string videoPath; // Variable to store the video path
+        private string photoPath;
+        private string videoPath;
+        private int kontenId;
+        private string selectedFilePath;
+        private string selectedFileType;
 
         public FormBuatKonten()
         {
-            koneksi = new Koneksi();
             InitializeComponent();
+            koneksi = new Koneksi();
 
             storageDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "konten");
-
             if (!Directory.Exists(storageDirectory))
             {
                 Directory.CreateDirectory(storageDirectory);
             }
 
+            LoadFriends();
+        }
+
+        private void LoadFriends()
+        {
             string username = Session.Username;
             Friends friendsManager = new Friends(koneksi);
             List<string> friends = friendsManager.GetFriends(username);
@@ -58,9 +65,42 @@ namespace projectUAS
                 return;
             }
 
-            string caption = txtCaption.Text;
-            string foto = photoPath ?? "none"; // Use the stored photo path or "none"
-            string video = videoPath ?? "none"; // Use the stored video path or "none"
+            string caption = txtCaption.Text.Trim(); // Trim whitespace from caption
+            string foto = "none"; // Default value
+            string video = "none"; // Default value
+
+            // Validation: Ensure caption is not empty and at least one media type is selected
+            if (string.IsNullOrEmpty(caption))
+            {
+                MessageBox.Show("Caption cannot be empty.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(selectedFilePath))
+            {
+                MessageBox.Show("Please select a photo or video.");
+                return;
+            }
+
+            // Check if a file has been selected and set the paths accordingly
+            if (!string.IsNullOrEmpty(selectedFilePath))
+            {
+                string fileExtension = Path.GetExtension(selectedFilePath);
+                string newFileName = $"konten-{username}-{DateTime.Now.Ticks}{fileExtension}"; // Unique filename
+                string destinationPath = Path.Combine(storageDirectory, newFileName);
+
+                // Copy the file to the destination path
+                File.Copy(selectedFilePath, destinationPath, true);
+
+                if (selectedFileType == "photo")
+                {
+                    foto = newFileName; // Store only the filename
+                }
+                else if (selectedFileType == "video")
+                {
+                    video = newFileName; // Store only the filename
+                }
+            }
 
             Konten newKonten = new Konten
             {
@@ -73,20 +113,44 @@ namespace projectUAS
 
             try
             {
-                int newId = newKonten.InsertKonten(koneksi);
+                // Insert the content into the database
+                kontenId = newKonten.InsertKonten(koneksi);
 
+                // Insert tags for the content
                 foreach (var item in checkedListBox1.CheckedItems)
                 {
                     string friendTag = item.ToString();
-                    newKonten.InsertTag(koneksi, newId, friendTag);
+                    newKonten.InsertTag(koneksi, kontenId, friendTag);
                 }
 
                 MessageBox.Show("Content added successfully!");
+
+                // Clear all fields and redirect to FormUtama
+                ClearFieldsAndRedirect();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error adding content: " + ex.Message);
             }
+        }
+
+
+        private void ClearFieldsAndRedirect()
+        {
+            txtCaption.Clear();
+            selectedFilePath = null;
+            selectedFileType = null;
+            photoPath = null;
+            videoPath = null;
+
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, false);
+            }
+
+            FormUtama mainForm = new FormUtama();
+            mainForm.Show();
+            this.Close();
         }
 
         private void btnSelectFile_Click(object sender, EventArgs e)
@@ -104,22 +168,18 @@ namespace projectUAS
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string filePath = openFileDialog.FileName;
-                    string fileName = Path.GetFileName(filePath);
-                    string destinationPath = Path.Combine(storageDirectory, fileName);
-
-                    File.Copy(filePath, destinationPath, true);
+                    selectedFilePath = openFileDialog.FileName;
+                    selectedFileType = radioPhoto.Checked ? "photo" : "video";
 
                     if (radioPhoto.Checked)
                     {
-                        photoPath = Path.Combine("konten", fileName); // Store the relative path for the photo
-                        pictureBox1.Image = Image.FromFile(destinationPath);
+                        pictureBox1.Image = Image.FromFile(selectedFilePath);
                         pictureBox1.Visible = true;
+                        pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; 
                         panel1.Visible = false;
                     }
                     else if (radioVideo.Checked)
                     {
-                        videoPath = Path.Combine("konten", fileName); // Store the relative path for the video
                         panel1.Visible = true;
                         pictureBox1.Visible = false;
                     }

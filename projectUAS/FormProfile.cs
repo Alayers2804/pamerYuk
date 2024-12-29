@@ -64,16 +64,24 @@ namespace projectUAS
             }
         }
 
-        private void LoadProfilePicture(string fotoPath)
+        private void LoadProfilePicture(string fotoFilename)
         {
-            string fullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fotoPath);
+            // Define the directory where the pictures are stored
+            string picturesDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pictures");
+
+            // Combine the directory with the filename to get the full path
+            string fullPath = Path.Combine(picturesDirectory, fotoFilename);
+
+            // Check if the file exists
             if (File.Exists(fullPath))
             {
+                // Load the image into the PictureBox
                 pcbProfpic.Image = Image.FromFile(fullPath);
                 pcbProfpic.SizeMode = PictureBoxSizeMode.Zoom;
             }
             else
             {
+                // If the file does not exist, set the PictureBox image to null
                 pcbProfpic.Image = null;
             }
         }

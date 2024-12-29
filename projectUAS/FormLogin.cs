@@ -22,8 +22,23 @@ namespace projectUAS
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txtUsername.Text;
-            string password = txtPassword.Text;
+            string username = txtUsername.Text.Trim(); // Trim whitespace from username
+            string password = txtPassword.Text.Trim(); // Trim whitespace from password
+
+            // Validate that username and password are not empty
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show("Username cannot be empty.");
+                txtUsername.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Password cannot be empty.");
+                txtPassword.Focus();
+                return;
+            }
 
             User user = new User();
             if (user.ValidateCredentials(username, password))
@@ -41,6 +56,7 @@ namespace projectUAS
                 MessageBox.Show("Invalid credentials, please try again.");
             }
         }
+
 
 
         private void btnDaftar_Click(object sender, EventArgs e)

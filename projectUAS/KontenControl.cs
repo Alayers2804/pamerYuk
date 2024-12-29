@@ -44,9 +44,10 @@ namespace projectUAS
                 lblTaggedUsers.Text = "Tagged Users: None";
             }
 
+            // Load the photo if it exists
             if (!string.IsNullOrEmpty(konten.Foto) && konten.Foto != "none")
             {
-                string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, konten.Foto);
+                string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "konten", konten.Foto);
                 if (File.Exists(imagePath))
                 {
                     pictureBox.Image = Image.FromFile(imagePath);
@@ -59,6 +60,7 @@ namespace projectUAS
                     pictureBox.Visible = false;
                 }
             }
+            // Load the video if it exists
             else if (!string.IsNullOrEmpty(konten.Video) && konten.Video != "none")
             {
                 videoPanel.Visible = true;
@@ -73,6 +75,7 @@ namespace projectUAS
             // Load comments for the current konten
             LoadComments(kontenId); // Ensure comments are loaded
         }
+
 
 
         private void LoadComments(int kontenId)

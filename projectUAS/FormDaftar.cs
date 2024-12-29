@@ -112,20 +112,97 @@ namespace projectUAS
 
         private void btnDaftar_Click(object sender, EventArgs e)
         {
-           
+            // Validate required fields
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
+            {
+                MessageBox.Show("Username cannot be empty.");
+                txtUsername.Focus();
+                return;
+            }
 
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Password cannot be empty.");
+                txtPassword.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtKTP.Text))
+            {
+                MessageBox.Show("KTP number cannot be empty.");
+                txtKTP.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtThnAwl.Text))
+            {
+                MessageBox.Show("Start year cannot be empty.");
+                txtThnAwl.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtThnAkr.Text))
+            {
+                MessageBox.Show("End year cannot be empty.");
+                txtThnAkr.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDeskripsi.Text))
+            {
+                MessageBox.Show("Description cannot be empty.");
+                txtDeskripsi.Focus();
+                return;
+            }
+
+            // Validate birth date
+            DateTime birthDate = dtpbirthDate.Value;
+            DateTime currentDate = DateTime.Now;
+
+            if (birthDate.Year > 2013 || birthDate.Date > currentDate.Date)
+            {
+                MessageBox.Show("Birth date must be on or before December 31, 2013, and cannot be set to a future date.");
+                dtpbirthDate.Focus();
+                return;
+            }
+
+            // Ensure a city is selected
+            if (GetSelectedCityId() == 0)
+            {
+                MessageBox.Show("Please select a city.");
+                cbxKota.Focus();
+                return;
+            }
+
+            // Ensure an organization is selected
+            if (GetSelectedOrganizationId() == 0)
+            {
+                MessageBox.Show("Please select an organization.");
+                cbxTingkat.Focus();
+                return;
+            }
+
+            // Ensure the image path is set correctly
+            if (string.IsNullOrWhiteSpace(imagePath))
+            {
+                MessageBox.Show("Please upload an image.");
+                return;
+            }
+
+            // Create a new user object
             User newUser = new User
             {
                 Username = txtUsername.Text,
                 Password = txtPassword.Text,
-                TglLahir = dtpbirthDate.Value,
+                TglLahir = birthDate,
                 NoKTP = txtKTP.Text,
-                Foto = imagePath,
+                Foto = Path.GetFileName(imagePath), // Store only the filename
                 IdKota = new Kota(GetSelectedCityId(), cbxKota.SelectedItem.ToString())
             };
 
             try
             {
+                // Insert the user into the database
                 newUser.InsertUser(koneksi);
                 MessageBox.Show("User registered successfully!");
 
@@ -134,6 +211,7 @@ namespace projectUAS
                 string thakhir = txtThnAkr.Text;
                 string deskripsi = txtDeskripsi.Text;
 
+                // Insert the user description into the database
                 newUser.InsertDescription(koneksi, organisasiId, thawal, thakhir, deskripsi);
                 MessageBox.Show("Description registered successfully!");
             }
@@ -142,6 +220,7 @@ namespace projectUAS
                 MessageBox.Show("Error registering user: " + ex.Message);
             }
         }
+
 
         private int GetSelectedCityId()
         {
@@ -160,7 +239,11 @@ namespace projectUAS
                 openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    string fileName = Path.GetFileName(openFileDialog.FileName);
+                    string username = txtUsername.Text.Trim(); // Get the username
+                    string fileExtension = Path.GetExtension(openFileDialog.FileName); // Get the file extension
+
+                    // Create a new file name using the username
+                    string newFileName = $"picture_{username}{fileExtension}";
                     string picturesDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pictures");
 
                     // Check if the pictures directory exists, if not, create it
@@ -169,20 +252,19 @@ namespace projectUAS
                         Directory.CreateDirectory(picturesDirectory);
                     }
 
-                    string destinationPath = Path.Combine(picturesDirectory, fileName);
+                    string destinationPath = Path.Combine(picturesDirectory, newFileName);
 
-                    // Copy the file to the destination path
+                    // Copy the file to the destination path with the new name
                     File.Copy(openFileDialog.FileName, destinationPath, true); // Overwrite if exists
 
+                    // Set the image path to the destination path
                     imagePath = destinationPath;
 
-                    // Load the image into the PictureBox
                     pictureBox1.Image = new Bitmap(destinationPath);
                     pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; // Set the SizeMode to Zoom
                 }
             }
         }
-
 
 
         private int GetSelectedOrganizationId()
