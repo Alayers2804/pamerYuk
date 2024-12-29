@@ -18,6 +18,7 @@ namespace projectUAS
         {
             koneksi = new Koneksi();
             InitializeComponent();
+            this.FormClosing += FormLogin_FormClosing;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -47,6 +48,8 @@ namespace projectUAS
                 Session.KotaId = user.GetKotaId(username, koneksi);
                 Session.OrganisasiId = user.GetOrganisasiId(username, koneksi);
 
+                koneksi.Dispose();
+
                 FormUtama formUtama = new FormUtama();
                 FormManager.ClearAndShow(formUtama);
                 this.Hide();
@@ -65,10 +68,11 @@ namespace projectUAS
             FormManager.ClearAndShow(formDaftar);
             this.Hide();
         }
-        protected override void OnFormClosing(FormClosingEventArgs e)
+        private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true; 
-            this.Hide(); 
+            FormUtama formUtama = new FormUtama();
+            FormManager.ClearAndShow(formUtama);
+            this.Hide();
         }
     }
 }

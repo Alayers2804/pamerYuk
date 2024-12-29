@@ -92,13 +92,15 @@ namespace projectUAS
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Session.Username == null)
+            if (Session.Username == null || Session.KotaId == 0 || Session.OrganisasiId == 0)
             {
                 MessageBox.Show("You are not logged in.");
                 return;
             }
             FormManager.Push(this);
             Session.Username = null;
+            Session.KotaId = 0;
+            Session.OrganisasiId = 0;
             FormLogin loginForm = new FormLogin();
             FormManager.ClearAndShow(loginForm);
         }
@@ -112,7 +114,7 @@ namespace projectUAS
 
                 foreach (var konten in kontenList)
                 {
-                    KontenControl kontenControl = new KontenControl();
+                    KontenControl kontenControl = new KontenControl(koneksi);
                     kontenControl.SetKonten(konten);
                     flowLayoutPanel1.Controls.Add(kontenControl); // Add the control to the FlowLayoutPanel
                 }
@@ -144,7 +146,9 @@ namespace projectUAS
 
         private void FormUtama_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            koneksi.Dispose(); 
+           
         }
+
     }
 }

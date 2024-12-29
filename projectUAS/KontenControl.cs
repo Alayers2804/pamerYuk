@@ -14,17 +14,18 @@ namespace projectUAS
         private TextBox txtCaption;
         private TextBox txtComment;
         private PictureBox pictureBox;
-        private Panel videoPanel; 
-        private Label lblUploader; 
+        private Panel videoPanel;
+        private Label lblUploader;
         private Label lblTaggedUsers;
-        private Koneksi koneksi;
+        private Koneksi koneksi; // Keep a reference to the connection
         private int kontenId;
 
-        public KontenControl()
+        // Constructor that accepts a Koneksi instance
+        public KontenControl(Koneksi koneksi)
         {
             InitializeComponent();
             panel1.AutoScroll = true;
-            koneksi = new Koneksi();
+            this.koneksi = koneksi; // Assign the passed connection
         }
 
         public void SetKonten(Konten konten)
@@ -75,8 +76,6 @@ namespace projectUAS
             // Load comments for the current konten
             LoadComments(kontenId); // Ensure comments are loaded
         }
-
-
 
         private void LoadComments(int kontenId)
         {
@@ -136,6 +135,7 @@ namespace projectUAS
                 }
             }
         }
+
 
         private void InitializeComponent()
         {

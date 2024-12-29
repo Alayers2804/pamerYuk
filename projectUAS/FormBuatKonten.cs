@@ -46,7 +46,7 @@ namespace projectUAS
         private void btnTutup_Click(object sender, EventArgs e)
         {
             while (FormManager.Pop() != null) { }
-
+            koneksi.Dispose();
             FormUtama mainForm = new FormUtama();
             mainForm.Show();
             this.Close();
@@ -125,7 +125,8 @@ namespace projectUAS
 
                 MessageBox.Show("Content added successfully!");
 
-                // Clear all fields and redirect to FormUtama
+                koneksi.Dispose();
+
                 ClearFieldsAndRedirect();
             }
             catch (Exception ex)

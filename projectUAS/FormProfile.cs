@@ -283,6 +283,7 @@ namespace projectUAS
 
             while (FormManager.Pop() != null) { }
 
+            koneksi.Dispose();
 
             FormUtama mainForm = new FormUtama();
             mainForm.Show();

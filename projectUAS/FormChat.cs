@@ -67,6 +67,7 @@ namespace projectUAS
 
         private void btnTutup_Click(object sender, EventArgs e)
         {
+            koneksi.Dispose();
 
             while (FormManager.Pop() != null) { }
 

@@ -36,7 +36,9 @@ namespace projectUAS
 
         private void btn_Tutup(object sender, EventArgs e)
         {
-            
+
+            koneksi.Dispose();
+
             while (FormManager.Pop() != null) { }
 
             FormUtama mainForm = new FormUtama();
